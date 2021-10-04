@@ -11,6 +11,8 @@
     "vite": "^2.6.0"
   },
   "dependencies": {
-    "chota": "^0.8.0"
+    "@vue/reactivity": "^3.2.19",
+    "chota": "^0.8.0",
+    "petite-vue": "^0.3.0"
   }
 }

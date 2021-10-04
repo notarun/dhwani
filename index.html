@@ -7,41 +7,49 @@
     <title>dhwani</title>
   </head>
   <body>
-    <div class="is-full-screen is-vertical-align is-horizontal-align">
-      <div class="container row bg-white is-paddingless" style="height: 68rem;">
-        <div class="bg-dark text-light col-4 is-marginless">
-          <img src="https://doodleipsum.com/700x525/abstract?bg=825DEB&i=533d71e7733d1ad05ecdc25051eed663" alt="album-art">
-          <div class="flex px-1" style="justify-content: space-between;">
-            <div>00:00</div>
-            <div><strong>Nirvana - Lithium</strong></div>
-            <div>03:29</div>
+    <div id="root" v-scope>
+      <div class="is-full-screen is-vertical-align is-horizontal-align">
+        <div class="container row bg-white is-paddingless" style="height: 68rem;">
+          <div class="bg-dark text-light col-4 is-marginless">
+            <img :src="nowPlaying.thumbnail" alt="album-art">
+            <div class="flex px-1" style="justify-content: space-between;">
+              <div><strong>{{ nowPlaying.title }}</strong></div>
+            </div>
+            <audio id="player" class="bg-dark is-full-width" controls>
+              Your browser does not support the
+              <code>audio</code> element.
+            </audio>
           </div>
-        </div>
-        <div class="flex column col">
-          <nav class="tabs is-full text-uppercase">
-            <a href="#" class="active">Search</a>
-            <a href="#">Queue</a>
-            <a href="#">Playlist</a>
-            <a href="#">Settings</a>
-          </nav>
-          <div class="flex column py-1">
-            <input type="text" placeholder="Search">
-            <table class="striped" style="flex: 1;">
-              <tbody>
-                <tr>
-                  <td class="is-full-width">Nirvana - Smeels like teen spirit</td>
-                  <td>▶️</td>
-                  <td>➕</td>
-                  <td>💾</td>
-                </tr>
-                <tr>
-                  <td class="is-full-width">Nirvan - The man who sold the world</td>
-                  <td>▶️</td>
-                  <td>➕</td>
-                  <td>💾</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="flex column col">
+            <nav class="tabs is-full text-uppercase">
+              <a href="#" class="active">Search</a>
+              <!-- <a href="#">Queue</a> -->
+              <!-- <a href="#">Playlist</a> -->
+              <!-- <a href="#">Settings</a> -->
+            </nav>
+            <div class="flex column py-1">
+              <form class="grouped" @submit="search">
+                <input type="text" placeholder="Search" v-model="searchQuery" required>
+                <button class="button primary" type="submit">Search</button>
+              </form>
+              <div v-if="searchResults.length === 0" class="text-center">
+                <h4 class="text-grey">
+                  Search something!
+                </h4>
+              </div>
+              <table v-else class="striped" style="flex: 1;">
+                <tbody class="d-block overflow-auto" style="height: 58rem;">
+                  <tr v-for="item in searchResults" :key="item.url">
+                    <td class="is-full-width">{{ item.title }}</td>
+                    <td>
+                      <button class="button icon clear" @click="playAudio(item.url)">
+                       ▶️
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
