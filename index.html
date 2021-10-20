@@ -11,14 +11,17 @@
       <div class="is-full-screen is-vertical-align is-horizontal-align">
         <div class="container row bg-white is-paddingless" style="height: 68rem;">
           <div class="bg-dark text-light col-4 is-marginless">
-            <img :src="nowPlaying.thumbnail" alt="album-art">
+            <img
+              :src="nowPlaying.thumbnail"
+              class="img-cover"
+              alt="album-art"
+              style="height: 340px; width: 100%;">
             <div class="flex px-1" style="justify-content: space-between;">
-              <div><strong>{{ nowPlaying.title }}</strong></div>
+              <div class="text-truncate">
+                <strong>{{ nowPlaying.title }}</strong>
+              </div>
             </div>
-            <audio id="player" class="bg-dark is-full-width" controls>
-              Your browser does not support the
-              <code>audio</code> element.
-            </audio>
+            <audio id="player" :src="nowPlaying.src" class="vlite-js"></audio>
           </div>
           <div class="flex column col">
             <nav class="tabs is-full text-uppercase">
@@ -38,7 +41,7 @@
                 </h4>
               </div>
               <table v-else class="striped" style="flex: 1;">
-                <tbody class="d-block overflow-auto" style="height: 58rem;">
+                <tbody class="d-block overflow-auto" style="height: 56rem;">
                   <tr v-for="item in searchResults" :key="item.url">
                     <td class="is-full-width">{{ item.title }}</td>
                     <td>

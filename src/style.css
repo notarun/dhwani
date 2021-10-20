@@ -1,13 +1,28 @@
 @import url('chota');
+@import url('vlitejs/dist/vlite.css');
 
 :root {
   --bg-color: #1d1d1d;
+  --color-white: #ffffff;
 }
 
-.bg-white { background-color: #ffffff; }
+.v-vlite.v-audio {
+  --vlite-controlsColor: var(--color-white);
+  --vlite-colorPrimary: var(--color-white);
+  box-shadow: none;
+}
+
+.text-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bg-white { background-color: var(--color-white); }
 .flex { display: flex; }
 .flex.column { flex-direction: column; }
 .px-1 { padding-left: 1rem; padding-right: 1rem; }
 .py-1 { padding-top: 1rem; padding-bottom: 1rem; }
 .d-block { display: block; }
 .overflow-auto { overflow: auto; }
+.img-cover { object-fit: cover; }
