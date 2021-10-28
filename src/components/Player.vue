@@ -1,14 +1,25 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import { usePlayerStore } from '../stores/player'
+
+export default defineComponent({
+  data() {
+    return {
+      playerStore: usePlayerStore(),
+    }
+  },
+})
 </script>
 
 <template>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--11-col">
-      <div class="mdl-typography--title">Awful Things</div>
-      <div>Lil Peep, Lil Tracy</div>
+      <div class="mdl-typography--title">{{ playerStore.nowPlaying.title }}</div>
+      <div>{{ playerStore.nowPlaying.uploaderName }}</div>
     </div>
     <div class="mdl-cell mdl-cell--1-col">
-      <span class="material-icons">favorite_border</span>
+      <span class="material-icons clickable">favorite_border</span>
     </div>
   </div>
 
@@ -21,9 +32,9 @@
   </div>
 
   <div class="text-center">
-    <span class="material-icons md-36">skip_previous</span>
-    <span class="material-icons md-48 mx-1">play_circle</span>
-    <span class="material-icons md-36">skip_next</span>
+    <span class="material-icons md-36 clickable">skip_previous</span>
+    <span class="material-icons md-48 mx-1 clickable">play_circle</span>
+    <span class="material-icons md-36 clickable">skip_next</span>
   </div>
 </template>
 
@@ -45,5 +56,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.material-icons.clickable {
+  cursor: pointer;
 }
 </style>
